@@ -1,4 +1,5 @@
 import unittest
+import xmlrunner
 
 from project1_testsuite.logger import get_logging
 LOGGER = get_logging()
@@ -26,7 +27,10 @@ class Play_Test():
         from project1_testsuite.regression.regressionTest import test_regression
         tc = unittest.TestLoader().loadTestsFromTestCase(test_regression)
         testSuite = unittest.TestSuite([tc])
-        unittest.TextTestRunner(verbosity=2).run(testSuite)
+        rc = unittest.TextTestRunner(verbosity=2).run(testSuite)
+        LOGGER.info(type(rc))
+        testRunner=xmlrunner.XMLTestRunner(output='test-reports')
+        testRunner.run(testSuite)
 
 
 
